@@ -20,6 +20,7 @@ node {
     }
   
     stage('unit tests') {
+        sh 'export CHROME_BIN=google-chrome-stable' // Set the CHROME_BIN environment variable
         sh "ng test"
     }
 
