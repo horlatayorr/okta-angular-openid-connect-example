@@ -23,6 +23,11 @@ node {
         sh "export CHROME_BIN=/usr/bin/google-chrome"// Set the CHROME_BIN environment variable
         sh "ng test --browsers=ChromeHeadlessNoSandbox" // Use Chrome Headless for testing
     }
+    
+    stage('Set Chrome Environment Variable') {
+        // Set the CHROME_BIN environment variable to the Chrome browser binary location
+        sh "export CHROME_BIN=/usr/bin/google-chrome"
+    }
 
     stage('Run tests') {
         sh "npm run test"
