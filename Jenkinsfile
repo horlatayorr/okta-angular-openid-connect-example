@@ -13,6 +13,7 @@ node {
 
     stage('npm install') {
         sh "npm install"
+        sh "npm run build"
     }
     
     stage('npm install angular') {
@@ -25,7 +26,25 @@ node {
     }
 
     stage('protractor tests') {
-        sh "ng e2e"
+        sh '''
+                #!/bin/bash
+                # Set up any necessary environment variables or configurations
+                
+                # Install test dependencies
+                npm install --only=dev
+                
+                # Start the application (if needed)
+                npm start &
+                
+                # Wait for the application to start (if needed)
+                sleep 10
+                
+                # Run the end-to-end tests
+                npm run e2e
+                
+                # Stop the application (if started)
+                pkill -f "npm start"
+            '''
     }
 
     stage('deploying') {
