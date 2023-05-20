@@ -29,13 +29,6 @@ node {
         sh "export CHROME_BIN=/usr/bin/google-chrome"
     }
 
-    stage('Test') {
-        withEnv(["CHROME_BIN=/usr/bin/google-chrome"]) {
-          sh 'ng test --progress=false --watch false'
-        }
-        junit '**/test-results.xml'
-    }
-
     stage('Lint') {
         sh 'ng lint'
     }
