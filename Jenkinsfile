@@ -29,18 +29,14 @@ node {
         sh "export CHROME_BIN=/usr/bin/google-chrome"
     }
 
-    stage('deploying') {
-        sh '''
-        # exit 1 on errors
-        set -e
-        # deal with remote
-        echo "Checking if remote exists..."
-        if ! git ls-remote heroku; then
-          #echo "Adding heroku remote..."
-          #git remote add heroku https://git.heroku.com/evening-meadow-46789.git
-        fi
-        echo "Updating heroku main branch..."
-        git push heroku main
-        '''
+    stage('Build') {
+        // Build the Angular project
+        sh 'ng build --prod'
+      }
+  
+    stage('Run') {
+        // Serve the Angular project using a web server
+        sh 'ng serve --prod'
     }
+
 }
