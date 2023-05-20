@@ -29,14 +29,29 @@ node {
         sh "export CHROME_BIN=/usr/bin/google-chrome"
     }
 
-    stage('Build') {
-        // Build the Angular project
-        sh 'ng build --prod'
-      }
-  
-    stage('Run') {
-        // Serve the Angular project using a web server
-        sh 'ng serve --prod'
+    stage('Test') {
+        withEnv(["CHROME_BIN=/usr/bin/google-chrome"]) {
+          sh 'ng test --progress=false --watch false'
+        }
+        junit '**/test-results.xml'
     }
 
+    stage('Lint') {
+        sh 'ng lint'
+    }
+
+    stage('Build') {
+        milestone()
+        sh 'ng build --prod --aot --sm --progress=false'
+    }
+
+    stage('Archive') {
+        sh 'tar -cvzf dist.tar.gz --strip-components=1 dist'
+        archive 'dist.tar.gz'
+    }
+
+    stage('Deploy') {
+        milestone()
+        echo "Deploying..."
+    }
 }
