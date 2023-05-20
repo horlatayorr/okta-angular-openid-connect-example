@@ -36,8 +36,8 @@ node {
         # deal with remote
         echo "Checking if remote exists..."
         if ! git ls-remote heroku; then
-          echo "Adding heroku remote..."
-          git remote add heroku https://git.heroku.com/evening-meadow-46789.git
+          #echo "Adding heroku remote..."
+          #git remote add heroku https://git.heroku.com/evening-meadow-46789.git
         fi
         echo "Updating heroku main branch..."
         git push heroku main
