@@ -39,10 +39,8 @@ node {
           echo "Adding heroku remote..."
           git remote add heroku https://git.heroku.com/evening-meadow-46789.git
         fi
-        # push only origin/master to heroku/master - will do nothing if
-        # master doesn't change.
-        echo "Updating heroku master branch..."
-        git push heroku origin/master:master
+        echo "Updating heroku main branch..."
+        git push heroku main
         '''
     }
 }
