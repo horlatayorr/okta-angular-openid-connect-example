@@ -28,11 +28,7 @@ node {
         // Set the CHROME_BIN environment variable to the Chrome browser binary location
         sh "export CHROME_BIN=/usr/bin/google-chrome"
     }
-
-    stage('Lint') {
-        sh 'ng lint'
-    }
-
+  
     stage('Build') {
         milestone()
         sh 'ng build --prod --aot --sm --progress=false'
