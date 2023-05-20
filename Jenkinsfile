@@ -24,26 +24,8 @@ node {
         sh "ng test --browsers=ChromeHeadlessNoSandbox" // Use Chrome Headless for testing
     }
 
-    stage('protractor tests') {
-        sh '''
-                #!/bin/bash
-                # Set up any necessary environment variables or configurations
-                
-                # Install test dependencies
-                npm install --only=dev
-                
-                # Start the application (if needed)
-                npm start &
-                
-                # Wait for the application to start (if needed)
-                sleep 10
-                
-                # Run the end-to-end tests
-                npm run e2e
-                
-                # Stop the application (if started)
-                pkill -f "npm start"
-            '''
+    stage('Run tests') {
+        sh "npm run test"
     }
 
     stage('deploying') {
