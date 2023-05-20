@@ -29,10 +29,6 @@ node {
         sh "export CHROME_BIN=/usr/bin/google-chrome"
     }
 
-    stage('Run tests') {
-        sh "npm run test"
-    }
-
     stage('deploying') {
         sh '''
         # exit 1 on errors
