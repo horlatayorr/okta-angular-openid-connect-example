@@ -13,7 +13,6 @@ node {
 
     stage('npm install') {
         sh "npm install"
-        sh "npm run build"
     }
     
     stage('npm install angular') {
